@@ -52,8 +52,8 @@
 				<artifactId>guice</artifactId>
 				<version>${version.guice}</version>
 			</dependency>
-			
-		
+
+
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
@@ -138,12 +138,12 @@
 				</executions>
 			</plugin>
 			<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-war-plugin</artifactId>
-					<configuration>
-						<archiveClasses>true</archiveClasses>
-						<attachClasses>true</attachClasses>					
-					</configuration>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<archiveClasses>true</archiveClasses>
+					<attachClasses>true</attachClasses>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
