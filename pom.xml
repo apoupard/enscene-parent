@@ -8,7 +8,7 @@
 
 	<packaging>pom</packaging>
 
-	<name>Enscne Configuration Argregator</name>
+	<name>Enscene Configuration Argregator</name>
 	<description>Enscne Configuration Argregator</description>
 
 
@@ -17,6 +17,7 @@
 		<version.maven-resources-plugin>2.6</version.maven-resources-plugin>
 		<version.build-helper-maven-plugin>1.9</version.build-helper-maven-plugin>
 		<version.maven-war-plugin>2.3</version.maven-war-plugin>
+		<version.maven-deploy-plugin>2.8.2</version.maven-deploy-plugin>
 
 		<version.guava>17.0</version.guava>
 		<version.guice>3.0</version.guice>
@@ -34,11 +35,21 @@
 
 		<resources.encoding>UTF-8</resources.encoding>
 
+		<github.global.userName>${env.GITHUB_USERNAME}</github.global.userName>
+		<github.global.password>${env.GITHUB_PASSWORD}</github.global.password>
 	</properties>
 
 	<prerequisites>
 		<maven>${maven.min.version}</maven>
 	</prerequisites>
+
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 
 	<dependencyManagement>
 		<dependencies>
@@ -116,6 +127,10 @@
 					<artifactId>build-helper-maven-plugin</artifactId>
 					<version>${version.build-helper-maven-plugin}</version>
 				</plugin>
+				<plugin>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>${version.maven-deploy-plugin}</version>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>
@@ -145,8 +160,47 @@
 					<attachClasses>true</attachClasses>
 				</configuration>
 			</plugin>
+			<plugin>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<configuration>
+					<altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.github.github</groupId>
+				<artifactId>site-maven-plugin</artifactId>
+				<version>0.11</version>
+				<configuration>
+					<message>Maven artifacts for ${project.version}</message>
+					<noJekyll>true</noJekyll>
+					<outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
+					<branch>refs/heads/master</branch>
+					<merge>true</merge>
+					<includes>
+						<include>**/*</include>
+					</includes>
+					<repositoryName>maven-repo</repositoryName>
+					<repositoryOwner>apoupard</repositoryOwner>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>site</goal>
+						</goals>
+						<phase>deploy</phase>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
+
+	<distributionManagement>
+		<repository>
+			<id>internal.repo</id>
+			<name>Temporary Staging Repository</name>
+			<url>file://${project.build.directory}/mvn-repo</url>
+		</repository>
+	</distributionManagement>
 
 </project>
