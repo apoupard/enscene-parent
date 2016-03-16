@@ -13,17 +13,17 @@
 
 
 	<properties>
-		<version.maven-compiler-plugin>3.1</version.maven-compiler-plugin>
-		<version.maven-resources-plugin>2.6</version.maven-resources-plugin>
-		<version.build-helper-maven-plugin>1.9</version.build-helper-maven-plugin>
-		<version.maven-war-plugin>2.3</version.maven-war-plugin>
+		<version.maven-compiler-plugin>3.5.1</version.maven-compiler-plugin>
+		<version.maven-resources-plugin>2.7</version.maven-resources-plugin>
+		<version.build-helper-maven-plugin>1.10</version.build-helper-maven-plugin>
+		<version.maven-war-plugin>2.6</version.maven-war-plugin>
 		<version.maven-deploy-plugin>2.8.2</version.maven-deploy-plugin>
 
-		<version.slf4j>1.7.7</version.slf4j>
-		<version.logback>1.1.2</version.logback>
+		<version.slf4j>1.7.19</version.slf4j>
+		<version.logback>1.1.6</version.logback>
 
-		<version.junit>4.11</version.junit>
-		<version.assertj>1.6.1</version.assertj>
+		<version.junit>4.12</version.junit>
+		<version.assertj>3.3.0</version.assertj>
 
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
